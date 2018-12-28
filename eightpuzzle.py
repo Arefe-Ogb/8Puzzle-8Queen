@@ -263,19 +263,16 @@ def createRandomEightPuzzle(moves=100):
     return puzzle
 
 if __name__ == '__main__':
-    puzzle = createRandomEightPuzzle(25)
-    print('A random puzzle:')
-    print(puzzle)
+    for i in range(1,13):
+	    puzzle = createRandomEightPuzzle(25)
+	    print('random puzzle number %d :' % i)
+	    print(puzzle)
 
-    problem = EightPuzzleSearchProblem(puzzle)
-    path = search.breadthFirstSearch(problem)
-    print('BFS found a path of %d moves: %s' % (len(path), str(path)))
-    curr = puzzle
-    i = 1
-    for a in path:
-        curr = curr.result(a)
-        print('After %d move%s: %s' % (i, ("", "s")[i>1], a))
-        print(curr)
-
-        raw_input("Press return for the next state...")   # wait for key stroke
-        i += 1
+	    problem = EightPuzzleSearchProblem(puzzle)
+	    path1 = search.aStarSearch(problem)
+	    path2 = search.hillClimbing(problem)
+	    path3 = search.simulatedAnnealing(problem)
+	    print('A* found a path of %d moves: %s' % (len(path1), str(path1)))
+	    print('hill climbing found a path of %d moves: %s' % (len(path2), str(path2)))
+	    print('simulated Annealing found a path of %d moves: %s' % (len(path3), str(path3)))
+	    print('\n\n\n')
